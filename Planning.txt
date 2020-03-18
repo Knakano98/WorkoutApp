@@ -1,0 +1,11 @@
+Workout App Features
+1. Able to enter custom workout plan 
+2. Able to enter exercise with custom reps/sets
+
+
+
+Todo:
+1. Implement homepage
+	-Execute workout button
+	-Select/Edit workouts 
+	-Stats/History
