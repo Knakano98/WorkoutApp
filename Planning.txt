@@ -2,19 +2,49 @@ Workout App Features
 1. Able to enter custom workout plan 
 2. Able to enter exercise with custom reps/sets
 
+
+Todo:
+1. Use concrete routine arraylist as test and set up dynamically adding days
+2. Need to figure out updating  
+
+
+
+
+
+
+1. Select/Edit 
+	- Main activity has list of workouts with a title
+		- Clicking workout leads to new activity which contains days of workout
+			-Clicking each day leads to list of exercises per day 
+				-Exercises can be added/removed
+				-Clicking on each individual exercise allows editing of Name, reps, sets
+			-Can add new day 
+		-Can add new workout
+
+
+-Activities that need to be made
+	-Main activity for sEdit
+	-Template activity for each routine
+	-Template activity for each day
+	-Template activity for each exercise
+
+	-Creation input template for routnie
+	-Creation input template for day
+	-Creation input template for exercise 
+
+
 Structure:
 -"Routines" array to contain all workout routines 
--"Workout"  arrays contain each "exercise"
+-"Workout"  arrays contain each "day"
+-Each "day" contains list of exercises 
 -"Exercise" obeject contains
 	- Name
 	- Reps
 	- Sets
-	- Weight
+	- Weight'
+
+Need to figure out whats stored in which activity 
+Needs to "sync up" with main array in main
 
 
 
-Todo:
-2. Implement Add workout
-	- List of existing workouts that gets added 
-	- Add workout button leads to new activity to add exercises
-	- Every workout in a horizontal layout with expanding option for edit/delete on right 
