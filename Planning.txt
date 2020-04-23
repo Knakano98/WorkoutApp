@@ -4,10 +4,22 @@ Workout App Features
 
 
 Todo:
-1. Use concrete routine arraylist as test and set up dynamically adding days
-2. Need to figure out updating  
+1. Creat routine/day object and update code to use it
+2. Add rest of add/delete/update for days/routines
+3. Create test input activity
+4. Figure out way to link said activity to updating main 
+
+5. Start setting up actitivies 
 
 
+Bottom up
+-What needs to happen in the "day" array
+	-Add/delete exercise
+	-Update exercise
+		-Dont think I actually need to update? 
+
+PROBLEMS:
+-Forgot that routine/days need NAMES, need to convert them to an object that contains a name and the arraylist 
 
 
 
