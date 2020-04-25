@@ -3,23 +3,30 @@ Workout App Features
 2. Able to enter exercise with custom reps/sets
 
 
-Todo:
-1. Creat routine/day object and update code to use it
-2. Add rest of add/delete/update for days/routines
-3. Create test input activity
-4. Figure out way to link said activity to updating main 
+Long term Todo:
+1. Get initial XML set up for routine list done
+2. Get buttons working and connected with dummy routine info input
+	-Create routine will add prefined routine info into the list for testing
+3. Get delete/edit working (Edit can just change the name to something to test) 
 
-5. Start setting up actitivies 
+4. Initial set up XML for day list 
+5. Get button working and connected with dummy exercise info input
+	-Create routine will add prefined exercise info into the list for testing
+3. Get delete/edit working (Edit can just change the name to something to test) 
+
+6. Brainstorm exercise 
 
 
-Bottom up
--What needs to happen in the "day" array
-	-Add/delete exercise
-	-Update exercise
-		-Dont think I actually need to update? 
+Activities:
+In order to access/edit each routine/day, just needs to have index of each in main
+Create passes -1 to indicate new one being created, otherwise number is index 
 
-PROBLEMS:
--Forgot that routine/days need NAMES, need to convert them to an object that contains a name and the arraylist 
+-Need to figure out delete 
+
+What happens when I need to add/delete/update exercise
+In any case that exercise is being interacted with, index for routine/day is already there 
+
+Start full work on routine activity, need to get the dynamic list thing working first
 
 
 
@@ -54,9 +61,5 @@ Structure:
 	- Reps
 	- Sets
 	- Weight'
-
-Need to figure out whats stored in which activity 
-Needs to "sync up" with main array in main
-
 
 
