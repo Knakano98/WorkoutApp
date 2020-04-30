@@ -2,11 +2,14 @@ package android.example.workouttracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 public class RoutineEditCreate extends AppCompatActivity {
+    Routine testRoutine=new Routine("routineTest");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,11 @@ public class RoutineEditCreate extends AppCompatActivity {
     }
 
     public void finish(View view){
+        Intent returnIntent=new Intent();
+
+        returnIntent.putExtra("routine",testRoutine);
+        //returnIntent.putExtra("test","test");
+        setResult(Activity.RESULT_OK,returnIntent);
         finish();
 
     }

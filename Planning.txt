@@ -1,3 +1,12 @@
+
+ABANDONED: REFACTORING
+
+
+
+
+
+
+
 Workout App Features
 1. Able to enter custom workout plan 
 2. Able to enter exercise with custom reps/sets
@@ -15,6 +24,23 @@ Long term Todo:
 3. Get delete/edit working (Edit can just change the name to something to test) 
 
 6. Brainstorm exercise 
+
+
+PROBLEM BIG PROBLEM:
+With way I structured it, cannot use any of the methods to alter main in the other activities WHICH IS BAD 
+potential solutions
+	1. Structure so that every change passes a change back into mainActivity, and then alters it in there 
+		-Sharedpreferences?
+
+		
+	2. Pass main into every new activity so it can displayin new activity (Essentially, all altering occurs in main) 
+		-Singleton for access? 
+	
+
+GENERALLY: Need to pass main into activity that comes before input activity, then create a copy and pass into the input activity
+	-Alter the copy in the input, then pass that copy back into main and update "main" main
+
+-Plan concrete from bottom up(Exercise input->Day input->routine input) 
 
 
 Activities:
@@ -61,5 +87,8 @@ Structure:
 	- Reps
 	- Sets
 	- Weight'
+
+
+
 
 
