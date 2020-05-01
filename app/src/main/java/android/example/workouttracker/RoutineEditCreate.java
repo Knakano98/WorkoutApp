@@ -7,9 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 public class RoutineEditCreate extends AppCompatActivity {
-    Routine testRoutine=new Routine("routineTest");
+    Routine testRoutine=new Routine("defaultRoutineName");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,11 @@ public class RoutineEditCreate extends AppCompatActivity {
     }
 
     public void finish(View view){
+        EditText input=(EditText)findViewById(R.id.routineName);
+        String routineName=input.getText().toString();
+
+        testRoutine.setName(routineName);
+
         Intent returnIntent=new Intent();
 
         returnIntent.putExtra("routine",testRoutine);

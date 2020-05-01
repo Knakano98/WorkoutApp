@@ -15,6 +15,10 @@ public class Routine implements Parcelable{
         this.routine=new ArrayList<Day>();
     }
 
+    public void setName(String name){
+        this.name=name;
+    }
+
     public String getName(){
         return name;
     }

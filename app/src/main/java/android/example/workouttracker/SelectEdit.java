@@ -6,14 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
 
 import static android.example.workouttracker.Storage.addRoutine;
+import static android.example.workouttracker.Storage.deleteRoutine;
 import static android.example.workouttracker.Storage.main;
 import static android.example.workouttracker.Storage.testMain;
 
@@ -21,6 +24,7 @@ import static android.example.workouttracker.Storage.testMain;
 public class SelectEdit extends AppCompatActivity {
 
     private LinearLayout containerLinLayout;
+    private ArrayList<LinearLayout> linLayouts=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class SelectEdit extends AppCompatActivity {
         setContentView(R.layout.activity_select_edit);
         this.setTitle("Select Routine");
         containerLinLayout=findViewById(R.id.routineContainer);
+        createListView();
 
     }
 
@@ -80,30 +85,57 @@ public class SelectEdit extends AppCompatActivity {
 
 
 
-
     public void createListView(){
         containerLinLayout.removeAllViews();
+
         for(Routine routine: main){
 
             //Generate new LinLayout container for routine
-            LinearLayout dynamicLinLayout=new LinearLayout(SelectEdit.this);
+            final LinearLayout dynamicLinLayout=new LinearLayout(SelectEdit.this);
             TextView routineName= new TextView(SelectEdit.this);
             routineName.append(routine.getName());
             dynamicLinLayout.addView(routineName);
 
-            Button editRoutine=new Button(SelectEdit.this);
+            //Create edit button
+            final Button editRoutine=new Button(SelectEdit.this);
             editRoutine.append("Edit");
             dynamicLinLayout.addView(editRoutine);
 
-            Button deleteRoutine=new Button(SelectEdit.this);
+            editRoutine.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    createRoutine(editRoutine);
+                }
+            });
+
+            //Create delete button
+            final Button deleteRoutine=new Button(SelectEdit.this);
+            final int deleteButtonID=View.generateViewId();
+            deleteRoutine.setId(deleteButtonID);
+
+            //Delete button listener
+            deleteRoutine.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    int indexOfMyView = ((ViewGroup) dynamicLinLayout.getParent()).indexOfChild(dynamicLinLayout);
+                    deleteRoutine(indexOfMyView);
+                    createListView();
+                }
+            });
+
+            //Set button text/ add to container lin layout
             deleteRoutine.append("Delete");
             dynamicLinLayout.addView(deleteRoutine);
 
+            //Add newly generated linear layout to scrollview Linear Layout
             containerLinLayout.addView(dynamicLinLayout);
+            int linLayoutID=View.generateViewId();
+            dynamicLinLayout.setId(linLayoutID);
+            linLayouts.add(dynamicLinLayout);
+
 
             //Need to generate ids for dynamically created stuff to get edit/delete working
-            //1. Delete
             //2. Edit
+                //add routine name input
+                //Edit needs to not add, need to
             //3. Create
         }
     }
