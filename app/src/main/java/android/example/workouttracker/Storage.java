@@ -47,6 +47,9 @@ public class Storage {
     public static void deleteRoutine(int routineIndex){
         main.remove(routineIndex);
     }
+    public static void updateRoutine(Routine newRoutine, int index){
+        main.set(index,newRoutine);
+    }
 
     //Debugging
     public static void testMain(){ //Testing function to display contents of main

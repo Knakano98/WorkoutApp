@@ -9,87 +9,74 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
-
-import java.util.ArrayList;
 
 import static android.example.workouttracker.Storage.addRoutine;
 import static android.example.workouttracker.Storage.deleteRoutine;
 import static android.example.workouttracker.Storage.main;
 import static android.example.workouttracker.Storage.testMain;
-
+import static android.example.workouttracker.Storage.updateRoutine;
 
 public class SelectEdit extends AppCompatActivity {
 
-    private LinearLayout containerLinLayout;
-    private ArrayList<LinearLayout> linLayouts=new ArrayList<>();
+    private LinearLayout containerLinLayout; //Container linear layout to represent new routine
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_edit);
         this.setTitle("Select Routine");
-        containerLinLayout=findViewById(R.id.routineContainer);
-        createListView();
 
+        containerLinLayout=findViewById(R.id.routineContainer); //Gets container Linear Layout in Scrollview that stores dynamically created routines
+        createListView();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
+        Bundle bundle=data.getExtras();
         Routine routine=data.getParcelableExtra("routine");
-        Log.v("debug",routine.getName());
+        Log.v("debug","EDIT TEST"+ routine.getName() + bundle.getInt("index"));
 
-        addRoutine(routine);
+        //Change so if edit, don't add to routine, instead edit
+        if(bundle.getInt("index")==-1){ //If new routine being created, add routine to main
+            addRoutine(routine);
+        }
+        else{//Else, routine is being edited, update routine at index
+            updateRoutine(routine,bundle.getInt("index"));
+        }
+
         testMain();
-
         createListView();
     }
-
 
     public void createRoutine(View view){
         Intent intent= new Intent(this,RoutineEditCreate.class);
 
-        //If new activity is accessed from createRoutine, -1 is passed to signal it is a new routine
-        //Else, the index of the routine being edited is passed
-        if(view.getId()==R.id.createRoutine){
+        if(view.getId()==R.id.createRoutine){//If new activity is accessed from createRoutine, -1 is passed to signal it is a new routine
             Log.v("debug","CREATEROUTINE");
             Bundle bundle=new Bundle();
             bundle.putInt("index",-1);
             intent.putExtras(bundle);
 
-
         }
-        else{
+        else{ //Else, the index of the routine being edited is passed
             Log.v("debug","EDITROUTINE");
             Bundle bundle=new Bundle();
-            bundle.putInt("index",0);
+            bundle.putInt("index",editIndex);
             intent.putExtras(bundle);
         }
 
         int ROUTINE_INPUT=1;
-        startActivityForResult(intent,ROUTINE_INPUT);
-
-
-        //Needs to dynamically generate/delete layout box with routine name/edit/delete in this activity
-        //Have "confirm" button in the new activity that leads back to here, and then generate layout box/ update main here
-        //Edit just edits but also edits layout box
-
-        //TODO HERE:
-        //3. Find way for xml list to sync up to main
-
+        startActivityForResult(intent,ROUTINE_INPUT); //Start routine input activity
     }
 
-
-
+    int editIndex=-420; //Stores index for routine being edited
 
     public void createListView(){
         containerLinLayout.removeAllViews();
 
         for(Routine routine: main){
-
             //Generate new LinLayout container for routine
             final LinearLayout dynamicLinLayout=new LinearLayout(SelectEdit.this);
             TextView routineName= new TextView(SelectEdit.this);
@@ -102,12 +89,13 @@ public class SelectEdit extends AppCompatActivity {
             dynamicLinLayout.addView(editRoutine);
 
             editRoutine.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    createRoutine(editRoutine);
+                public void onClick(View v) { //Gets index of routine being edited
+                    editIndex = ((ViewGroup) dynamicLinLayout.getParent()).indexOfChild(dynamicLinLayout);
+                    createRoutine(editRoutine); //Call createRoutine from an edit button
                 }
             });
 
-            //Create delete button
+            //Create delete button and generate ID
             final Button deleteRoutine=new Button(SelectEdit.this);
             final int deleteButtonID=View.generateViewId();
             deleteRoutine.setId(deleteButtonID);
@@ -115,9 +103,9 @@ public class SelectEdit extends AppCompatActivity {
             //Delete button listener
             deleteRoutine.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    int indexOfMyView = ((ViewGroup) dynamicLinLayout.getParent()).indexOfChild(dynamicLinLayout);
-                    deleteRoutine(indexOfMyView);
-                    createListView();
+                    int indexOfMyView = ((ViewGroup) dynamicLinLayout.getParent()).indexOfChild(dynamicLinLayout);//Get index of routine being deleted
+                    deleteRoutine(indexOfMyView); //Delete appropriate routine
+                    createListView(); //Refresh routine display
                 }
             });
 
@@ -125,25 +113,8 @@ public class SelectEdit extends AppCompatActivity {
             deleteRoutine.append("Delete");
             dynamicLinLayout.addView(deleteRoutine);
 
-            //Add newly generated linear layout to scrollview Linear Layout
-            containerLinLayout.addView(dynamicLinLayout);
-            int linLayoutID=View.generateViewId();
-            dynamicLinLayout.setId(linLayoutID);
-            linLayouts.add(dynamicLinLayout);
-
-
-            //Need to generate ids for dynamically created stuff to get edit/delete working
-            //2. Edit
-                //add routine name input
-                //Edit needs to not add, need to
-            //3. Create
+            containerLinLayout.addView(dynamicLinLayout); //Add newly generated routine to container linear layout
         }
     }
-
-    //Create routine button leads to routine creation activity, can create/edit routine be same activity?
-        //Pass index into routine creation activity, so -1 if new, and index num if edit
-    //Routine creation activity contains input for name, and create days(with eventually days also displayed)
-    //Create day leads to same thing except with exercises
-
 
 }
