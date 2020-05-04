@@ -1,70 +1,13 @@
-
-ABANDONED: REFACTORING
-
-
-
-
+Todo:
+Create day input activity 
+Set up dynamic XML for days
+Get add day working
 
 
+4.Get edit working
 
-Workout App Features
-1. Able to enter custom workout plan 
-2. Able to enter exercise with custom reps/sets
-
-
-Long term Todo:
-1. Get initial XML set up for routine list done
-2. Get buttons working and connected with dummy routine info input
-	-Create routine will add prefined routine info into the list for testing
-3. Get delete/edit working (Edit can just change the name to something to test) 
-
-4. Initial set up XML for day list 
-5. Get button working and connected with dummy exercise info input
-	-Create routine will add prefined exercise info into the list for testing
-3. Get delete/edit working (Edit can just change the name to something to test) 
-
-6. Brainstorm exercise 
-
-
-PROBLEM BIG PROBLEM:
-With way I structured it, cannot use any of the methods to alter main in the other activities WHICH IS BAD 
-potential solutions
-	1. Structure so that every change passes a change back into mainActivity, and then alters it in there 
-		-Sharedpreferences?
-
-		
-	2. Pass main into every new activity so it can displayin new activity (Essentially, all altering occurs in main) 
-		-Singleton for access? 
-	
-
-GENERALLY: Need to pass main into activity that comes before input activity, then create a copy and pass into the input activity
-	-Alter the copy in the input, then pass that copy back into main and update "main" main
-
--Plan concrete from bottom up(Exercise input->Day input->routine input) 
-
-
-Activities:
-In order to access/edit each routine/day, just needs to have index of each in main
-Create passes -1 to indicate new one being created, otherwise number is index 
-
--Need to figure out delete 
-
-What happens when I need to add/delete/update exercise
-In any case that exercise is being interacted with, index for routine/day is already there 
-
-Start full work on routine activity, need to get the dynamic list thing working first
-
-
-
-
-1. Select/Edit 
-	- Main activity has list of workouts with a title
-		- Clicking workout leads to new activity which contains days of workout
-			-Clicking each day leads to list of exercises per day 
-				-Exercises can be added/removed
-				-Clicking on each individual exercise allows editing of Name, reps, sets
-			-Can add new day 
-		-Can add new workout
+-Minor things
+	-Make input field on text display current name before being edited (currently just blank when opened)
 
 
 -Activities that need to be made

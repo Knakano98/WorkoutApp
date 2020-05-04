@@ -19,7 +19,7 @@ import static android.example.workouttracker.Storage.updateRoutine;
 
 public class SelectEdit extends AppCompatActivity {
 
-    private LinearLayout containerLinLayout; //Container linear layout to represent new routine
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +34,25 @@ public class SelectEdit extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        Bundle bundle=data.getExtras();
-        Routine routine=data.getParcelableExtra("routine");
-        Log.v("debug","EDIT TEST"+ routine.getName() + bundle.getInt("index"));
 
-        //Change so if edit, don't add to routine, instead edit
-        if(bundle.getInt("index")==-1){ //If new routine being created, add routine to main
-            addRoutine(routine);
-        }
-        else{//Else, routine is being edited, update routine at index
-            updateRoutine(routine,bundle.getInt("index"));
+        if (resultCode == RESULT_OK) {
+            Bundle bundle=data.getExtras();
+            Routine routine=data.getParcelableExtra("routine");
+            Log.v("debug","EDIT TEST"+ routine.getName() + bundle.getInt("index"));
+
+            //Change so if edit, don't add to routine, instead edit
+            if(bundle.getInt("index")==-1){ //If new routine being created, add routine to main
+                addRoutine(routine);
+            }
+            else{//Else, routine is being edited, update routine at index
+                updateRoutine(routine,bundle.getInt("index"));
+            }
+
+            testMain();
+            createListView();
         }
 
-        testMain();
-        createListView();
+
     }
 
     public void createRoutine(View view){
@@ -71,8 +76,9 @@ public class SelectEdit extends AppCompatActivity {
         startActivityForResult(intent,ROUTINE_INPUT); //Start routine input activity
     }
 
-    int editIndex=-420; //Stores index for routine being edited
 
+    int editIndex=-420; //Stores index for routine being edited
+    private LinearLayout containerLinLayout; //Container linear layout to represent new routine
     public void createListView(){
         containerLinLayout.removeAllViews();
 

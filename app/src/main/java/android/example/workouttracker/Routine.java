@@ -19,12 +19,24 @@ public class Routine implements Parcelable{
         this.name=name;
     }
 
+    public int routineSize(){
+        return routine.size();
+    }
+
+//    public Routine deleteDay(int index, Routine routine){
+//        routine.removeAtIndex(index);
+//    }
+
     public String getName(){
         return name;
     }
 
     public Day getAtIndex(int index){
         return routine.get(index);
+    }
+
+    public void set(Day day, int index){
+        routine.set(index,day);
     }
 
     public void add(Day day){

@@ -12,9 +12,6 @@ public class Storage {
         return main;
     }
 
-    public void updateMain(ArrayList<Routine> newMain){
-        this.main=newMain;
-    }
 
     //Functions to add/delete/update exercises in each day
     public static void addExercise(int routineIndex,int dayIndex,Exercise exercise){ //Working
@@ -28,13 +25,14 @@ public class Storage {
     }
 
     //Functions to add/delete days in routine (Dont need update, can just alter directly using update exercise)
-    public static void addDay(int routineIndex,String name){//Working
-        if(name==null){
-            name="defaultName";
-        }
+    public static Routine addDay(Routine routine, Day day){//Working
+        routine.add(day);
+        return routine;
+    }
 
-        Day day=new Day(name);
-        main.get(routineIndex).add(day);
+    public static Routine updateDay(Routine routine, Day day ,int index){//Working
+        routine.set(day,index);
+        return routine;
     }
     public static void deleteDay(int routineIndex, int deleteIndex){ //Working
         main.get(routineIndex).removeAtIndex(deleteIndex);
