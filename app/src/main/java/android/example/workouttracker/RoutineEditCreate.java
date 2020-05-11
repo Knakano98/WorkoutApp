@@ -84,9 +84,9 @@ public class RoutineEditCreate extends AppCompatActivity {
 
             //Create new linLayout container for day
             final LinearLayout dynamicLinLayout=new LinearLayout(RoutineEditCreate.this);
-            TextView routineName= new TextView(RoutineEditCreate.this);
-            routineName.append(day.getName());
-            dynamicLinLayout.addView(routineName);
+            TextView dayName= new TextView(RoutineEditCreate.this);
+            dayName.append(day.getName());
+            dynamicLinLayout.addView(dayName);
 
             //Create edit button
             final Button editDay=new Button(RoutineEditCreate.this);
@@ -103,7 +103,7 @@ public class RoutineEditCreate extends AppCompatActivity {
             //Create delete button
             final Button deleteDay=new Button(RoutineEditCreate.this);
             final int deleteButtonID=View.generateViewId();
-            deleteDay.setId(deleteButtonID);
+            deleteDay.setId(deleteButtonID); //What is this for? Unneeded?
             deleteDay.append("Delete");
             dynamicLinLayout.addView(deleteDay);
 
@@ -142,25 +142,25 @@ public class RoutineEditCreate extends AppCompatActivity {
 
             createListView(); //Refresh display
         }
-
-
     }
 
     public void createDay(View view){
         Intent intent= new Intent(this,DayEditCreate.class);
 
+        Bundle bundle=new Bundle();
+        bundle.putInt("routineIndex",index);
+
         if(view.getId()==R.id.createDay){//If new activity is accessed from createDay, -1 is passed to DayEditCreate to signal it is a new Day
             Log.v("debug","CREATEDAY");
-            Bundle bundle=new Bundle();
             bundle.putInt("index",-1);
             intent.putExtras(bundle);
-
         }
+
         else{ //Else, the index of the routine being edited is passed
             Log.v("debug","EDITDAY");
-            Bundle bundle=new Bundle();
             bundle.putInt("index",editIndex);
             intent.putExtras(bundle);
+            intent.putExtra("newRoutine", newRoutine);
         }
 
         int DAY_INPUT=1;

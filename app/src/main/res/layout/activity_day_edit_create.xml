@@ -31,28 +31,40 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="add Exercise"
-                    android:id="@+id/createExercise"
+                android:orientation="vertical"
+                android:id="@+id/exerciseContainer">
 
-                    />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Finish"
-                    android:id="@+id/finish"
-                    android:onClick="finish"
-                    />
             </LinearLayout>
+
+
+
         </ScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="add Exercise"
+                android:id="@+id/createExercise"
+                android:onClick="createExercise"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Finish"
+                android:id="@+id/finish"
+                android:onClick="finish"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 

@@ -14,14 +14,16 @@ public class Storage {
 
 
     //Functions to add/delete/update exercises in each day
-    public static void addExercise(int routineIndex,int dayIndex,Exercise exercise){ //Working
-        main.get(routineIndex).getAtIndex(dayIndex).add(exercise);
+    public static Day addExercise(Day day, Exercise exercise){ //Working
+        day.add(exercise);
+        return day;
     }
     public static void deleteExercise(int routineIndex,int dayIndex, int deleteIndex){ //Working
         main.get(routineIndex).getAtIndex(dayIndex).removeAtIndex(deleteIndex);
     }
-    public static void updateExercise(int routineIndex, int dayIndex, int updateIndex, Exercise newExercise){ //Working
-        main.get(routineIndex).getAtIndex(dayIndex).setExerciseAtIndex(updateIndex, newExercise);
+    public static Day updateExercise(Day day, Exercise exercise,int index){ //Working
+        day.set(exercise,index);
+        return day;
     }
 
     //Functions to add/delete days in routine (Dont need update, can just alter directly using update exercise)

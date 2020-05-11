@@ -24,6 +24,10 @@ public class Day implements Parcelable {
         this.name=name;
     }
 
+    public int daySize(){
+        return day.size();
+    }
+
     public Exercise getAtIndex(int index){
         return day.get(index);
     }
@@ -32,12 +36,12 @@ public class Day implements Parcelable {
         day.add(exercise);
     }
 
-    public void removeAtIndex(int index){
-        day.remove(index);
+    public void set(Exercise exercise,int index){
+        day.set(index,exercise);
     }
 
-    public void setExerciseAtIndex(int index, Exercise exercise){
-        day.set(index,exercise);
+    public void removeAtIndex(int index){
+        day.remove(index);
     }
 
     public void logDay(){
@@ -46,6 +50,7 @@ public class Day implements Parcelable {
             Log.v("debug","            Reps: " + exercise.getReps());
             Log.v("debug","            Sets: " + exercise.getSets());
             Log.v("debug","            Weight: " + exercise.getWeight());
+            Log.v("debug","            Time: " + exercise.getRestTime());
 
         }
     }

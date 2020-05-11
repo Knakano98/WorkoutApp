@@ -1,24 +1,26 @@
 Todo:
-Create day input activity 
-Set up dynamic XML for days
-Get add day working
+Add editText setters
+1.5 Add button to routine list to "select" current routine
+2. Begin Execute
 
 
-4.Get edit working
 
 -Minor things
 	-Make input field on text display current name before being edited (currently just blank when opened)
+	-Be able to change order of days/exercises by dragging
+	-"Are you sure" pop up before deleting 
+	-Able to enter seperate time/reps for each set of exercise
+	-Be able to change weight increase per session for exercise 
+	-Change xml generation so it doesnt remove and regen everytime(inefficient?)
 
 
--Activities that need to be made
-	-Main activity for sEdit
-	-Template activity for each routine
-	-Template activity for each day
-	-Template activity for each exercise
+EXECUTE PLANNING: 
+-Opening execute shows list of days from routine selected
+-Clicking day shows list of exercises
+-Clicking routine opens Input to enter weight/rep of exercise
+-Finish saves info (Need to create class to store "stats") for that set
+-Timer starts for rest time 
 
-	-Creation input template for routnie
-	-Creation input template for day
-	-Creation input template for exercise 
 
 
 Structure:
@@ -32,6 +34,12 @@ Structure:
 	- Weight'
 
 
+BUGS: 
+1. App crashes when attempting to edit day during routine creation
+	-Open routine input activity
+	-Open "Add day" and input a day
+	-Attempt to edit new day 
+	-Crashes
 
 
 
