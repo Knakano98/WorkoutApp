@@ -1,5 +1,7 @@
 Todo:
-Add editText setters
+0. Fix storage 
+0.5 Create test run
+1.Add editText setters
 1.5 Add button to routine list to "select" current routine
 2. Begin Execute
 
@@ -35,11 +37,11 @@ Structure:
 
 
 BUGS: 
-1. App crashes when attempting to edit day during routine creation
-	-Open routine input activity
-	-Open "Add day" and input a day
-	-Attempt to edit new day 
-	-Crashes
 
 
+TEST CASES:
+Input
+Secondary input
+Delete
+Edit 
 

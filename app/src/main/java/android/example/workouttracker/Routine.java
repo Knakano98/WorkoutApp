@@ -23,10 +23,6 @@ public class Routine implements Parcelable{
         return routine.size();
     }
 
-//    public Routine deleteDay(int index, Routine routine){
-//        routine.removeAtIndex(index);
-//    }
-
     public String getName(){
         return name;
     }
@@ -93,7 +89,4 @@ public class Routine implements Parcelable{
             return new Routine[size];
         }
     };
-
-
-
 }

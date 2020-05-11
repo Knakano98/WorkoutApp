@@ -19,8 +19,6 @@ import static android.example.workouttracker.Storage.updateRoutine;
 
 public class SelectEdit extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,19 +56,18 @@ public class SelectEdit extends AppCompatActivity {
     public void createRoutine(View view){
         Intent intent= new Intent(this,RoutineEditCreate.class);
 
+        Bundle bundle=new Bundle();
+
         if(view.getId()==R.id.createRoutine){//If new activity is accessed from createRoutine, -1 is passed to signal it is a new routine
             Log.v("debug","CREATEROUTINE");
-            Bundle bundle=new Bundle();
             bundle.putInt("index",-1);
-            intent.putExtras(bundle);
-
         }
         else{ //Else, the index of the routine being edited is passed
-            Log.v("debug","EDITROUTINE");
-            Bundle bundle=new Bundle();
+            Log.v("debug","EDITROUTINE");;
             bundle.putInt("index",editIndex);
-            intent.putExtras(bundle);
         }
+
+        intent.putExtras(bundle);
 
         int ROUTINE_INPUT=1;
         startActivityForResult(intent,ROUTINE_INPUT); //Start routine input activity
@@ -80,6 +77,7 @@ public class SelectEdit extends AppCompatActivity {
     int editIndex=-420; //Stores index for routine being edited
     private LinearLayout containerLinLayout; //Container linear layout to represent new routine
     public void createListView(){
+
         containerLinLayout.removeAllViews();
 
         for(Routine routine: main){
@@ -101,10 +99,10 @@ public class SelectEdit extends AppCompatActivity {
                 }
             });
 
-            //Create delete button and generate ID
+            //Create delete button
             final Button deleteRoutine=new Button(SelectEdit.this);
-            final int deleteButtonID=View.generateViewId();
-            deleteRoutine.setId(deleteButtonID);
+            deleteRoutine.append("Delete");
+            dynamicLinLayout.addView(deleteRoutine);
 
             //Delete button listener
             deleteRoutine.setOnClickListener(new View.OnClickListener() {
@@ -114,10 +112,6 @@ public class SelectEdit extends AppCompatActivity {
                     createListView(); //Refresh routine display
                 }
             });
-
-            //Set button text/ add to container lin layout
-            deleteRoutine.append("Delete");
-            dynamicLinLayout.addView(deleteRoutine);
 
             containerLinLayout.addView(dynamicLinLayout); //Add newly generated routine to container linear layout
         }

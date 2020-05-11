@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class ExerciseInput extends AppCompatActivity {
     Exercise newExercise= new Exercise("defaultName",0,0,0,0);
-    int index;
+    int index; //Index of exercise being edited (created=-1)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,10 @@ public class ExerciseInput extends AppCompatActivity {
 
 
     public void finish(View view){
+        //Create return intent
         Intent returnIntent=new Intent();
+
+        //Get name,rep,sets,resttime from editTexts
         EditText nameInput=findViewById(R.id.nameInput);
         String name=nameInput.getText().toString();
         newExercise.setName(name);
@@ -44,18 +47,10 @@ public class ExerciseInput extends AppCompatActivity {
         newExercise.setRestTime(time);
 
 
-
         returnIntent.putExtra("exercise",newExercise);
         returnIntent.putExtra("index",index);
 
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
-
     }
-
-
-    //Todo:
-    //Get delete/edit exercise working
-    //
-
 }

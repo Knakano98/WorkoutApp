@@ -49,9 +49,6 @@ public class Exercise implements Parcelable {
     }
     public void setRestTime(int restTime){this.restTime=restTime;}
 
-
-
-
     protected Exercise(Parcel in) {
         name = in.readString();
         reps = in.readInt();

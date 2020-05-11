@@ -14,10 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
     }
-
 
     //Functions for button on main activity
     public void execute(View view){
@@ -41,8 +38,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         Log.v("debug","HISTORY");
     }
-
-
-
-
 }

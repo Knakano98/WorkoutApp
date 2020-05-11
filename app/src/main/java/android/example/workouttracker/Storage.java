@@ -12,7 +12,6 @@ public class Storage {
         return main;
     }
 
-
     //Functions to add/delete/update exercises in each day
     public static Day addExercise(Day day, Exercise exercise){ //Working
         day.add(exercise);

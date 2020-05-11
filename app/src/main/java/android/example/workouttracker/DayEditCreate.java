@@ -33,33 +33,23 @@ public class DayEditCreate extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
 
         //If index in bundle is -1, means new day is being created
+        index=bundle.getInt("index");
 
-
-
-        if(bundle.getInt("index")==-1){
-            //Log.v("debug","DAY EDIT CREATE: CREATE ");
-            index=bundle.getInt("index");
-        }
-        else{ //Else, the index represents the index of day being edited
-            index=bundle.getInt("index");
+        if(index!=-1){ //If not -1, is being edited. Get day from routine/main to edit
             int routineIndex=bundle.getInt("routineIndex");
-
+            //Get routine being created/edited
             Routine newRoutine=bundle.getParcelable("newRoutine");
-
-            if(routineIndex==-1){ //Shows currently in routine creation
-                newDay=newRoutine.getAtIndex(index);
-            }
-            else{//Else routine is already saved in main
-                newDay=main.get(routineIndex).getAtIndex(index);
-            }
+            //Sets newDay to exiting day begin edited
+            newDay=newRoutine.getAtIndex(index);
         }
 
-        createListView();
+        createListView(); //Display Day list
     }
 
-    public void finish(View view){ //Listener for finish button
-        //Gets name for day
-        EditText input=(EditText)findViewById(R.id.dayName);
+    //Listener for finish button
+    public void finish(View view){
+        //Gets name for day and sets it
+        EditText input=findViewById(R.id.dayName);
         String routineName=input.getText().toString();
         newDay.setName(routineName);
 
@@ -73,17 +63,17 @@ public class DayEditCreate extends AppCompatActivity {
 
     }
 
-    int editIndex=-420;
+    int editIndex=-420; //editIndex tracks index of exercise being edited
+
+    //Listener for opening ExerciseInput
     public void createExercise(View view){
         Intent intent= new Intent(this,ExerciseInput.class);
         Bundle bundle=new Bundle();
 
-        if(view.getId()==R.id.createExercise){
-            Log.v("debug","createExercise");
+        if(view.getId()==R.id.createExercise){ //Sends -1 as index if being called from create
             bundle.putInt("index",-1);
         }
-        else{
-            Log.v("debug","editExercise");
+        else{ //Else sends the index of exercise being edited;
             bundle.putInt("index",editIndex);
         }
 
@@ -98,21 +88,14 @@ public class DayEditCreate extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
 
         if (resultCode == RESULT_OK) {
-            //Get day from dayEditCreate
+            //Get exercise from ExerciseInput
             Bundle bundle=data.getExtras();
             Exercise exercise=data.getParcelableExtra("exercise");
 
-
-            Log.v("debug",exercise.getName());
-            Log.v("debug",Integer.toString(bundle.getInt("index")));
-
-
             if(bundle.getInt("index")==-1){ //If new day being created, add day to routine
                 newDay=addExercise(newDay,exercise);
-                Log.v("debug","CREATEEXERCISE" + newDay.getAtIndex(0).getName());
             }
             else{//Else, routine is being edited, update day at index
-
                 newDay=updateExercise(newDay,exercise,editIndex);
             }
 
@@ -120,44 +103,53 @@ public class DayEditCreate extends AppCompatActivity {
         }
     }
 
-    private LinearLayout containerLinLayout;
+    private LinearLayout containerLinLayout;//Contains container for Exercises
+
     public void createListView(){
         containerLinLayout.removeAllViews();
+
+        //Iterate through every exercise in newDay and display
         for(int i=0;i<newDay.daySize();i++){
             Exercise exercise=newDay.getAtIndex(i);
 
+            //Create new Linear Layout
             final LinearLayout dynamicLinLayout=new LinearLayout(DayEditCreate.this);
+
+            //Get name of exercise and set TextView
             TextView exerciseName= new TextView(DayEditCreate.this);
             exerciseName.append(exercise.getName());
+            //Add to container
             dynamicLinLayout.addView(exerciseName);
 
+            //Create editExercise button, set text and add to container
             final Button editExercise=new Button(DayEditCreate.this);
             editExercise.append("Edit");
             dynamicLinLayout.addView(editExercise);
 
+            //Listener for edit button being created
             editExercise.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) { //Gets index of Exercise being edited
+                public void onClick(View v) {
+                    //Gets index of Exercise being edited
                     editIndex = ((ViewGroup) dynamicLinLayout.getParent()).indexOfChild(dynamicLinLayout);
                     createExercise(editExercise); //Call createExercise from an edit button
                 }
             });
 
+            //Create deleteExercise button, set text and add to container
             final Button deleteExercise=new Button(DayEditCreate.this);
             deleteExercise.append("Delete");
             dynamicLinLayout.addView(deleteExercise);
 
+            //Listener for delete button
             deleteExercise.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     int indexOfMyView = ((ViewGroup) dynamicLinLayout.getParent()).indexOfChild(dynamicLinLayout);//Get index of day being deleted
                     newDay.removeAtIndex(indexOfMyView);//Delete appropriate day
-
                     createListView(); //Refresh routine display
                 }
             });
 
             containerLinLayout.addView(dynamicLinLayout); //Add newly generated day to container linear layout
         }
-
-
     }
 }
