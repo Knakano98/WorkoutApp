@@ -36,11 +36,14 @@ public class DayEditCreate extends AppCompatActivity {
         index=bundle.getInt("index");
 
         if(index!=-1){ //If not -1, is being edited. Get day from routine/main to edit
-            int routineIndex=bundle.getInt("routineIndex");
             //Get routine being created/edited
             Routine newRoutine=bundle.getParcelable("newRoutine");
             //Sets newDay to exiting day begin edited
+            EditText input=findViewById(R.id.dayName);
+
             newDay=newRoutine.getAtIndex(index);
+            input.setText(newDay.getName());
+
         }
 
         createListView(); //Display Day list
@@ -75,6 +78,7 @@ public class DayEditCreate extends AppCompatActivity {
         }
         else{ //Else sends the index of exercise being edited;
             bundle.putInt("index",editIndex);
+            intent.putExtra("newDay",newDay);
         }
 
         intent.putExtras(bundle);

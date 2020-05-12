@@ -37,16 +37,18 @@ public class RoutineEditCreate extends AppCompatActivity {
         //Get bundle from SelectEdit
         Bundle bundle=getIntent().getExtras();
         //If index in bundle is -1, means new routine is being created
-        if(bundle.getInt("index")==-1){
-            Log.v("debug","ROUTINE EDIT CREATE: CREATE ");
-            index=bundle.getInt("index");
-        }
-        else{ //Else, the index represents the index of routine being edited
-            Log.v("debug","ROUTINE EDIT CREATE: EDIT "+ bundle.getInt("index"));
-            index=bundle.getInt("index");
+
+        index=bundle.getInt("index");
+
+        if(bundle.getInt("index")!=-1){
             //Sets new routine to routine being edited
+            EditText input=(EditText)findViewById(R.id.routineName);
             newRoutine=main.get(index);
+            input.setText(newRoutine.getName());
         }
+
+
+
 
         //Display days in routine
         createListView();
