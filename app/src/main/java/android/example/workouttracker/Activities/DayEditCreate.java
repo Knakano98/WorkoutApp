@@ -1,11 +1,14 @@
-package android.example.workouttracker;
+package android.example.workouttracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.example.workouttracker.Objects.Day;
+import android.example.workouttracker.Objects.Exercise;
+import android.example.workouttracker.Objects.Routine;
+import android.example.workouttracker.R;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static android.example.workouttracker.Storage.addExercise;
-import static android.example.workouttracker.Storage.main;
 import static android.example.workouttracker.Storage.updateExercise;
 
 public class DayEditCreate extends AppCompatActivity {
@@ -70,7 +72,7 @@ public class DayEditCreate extends AppCompatActivity {
 
     //Listener for opening ExerciseInput
     public void createExercise(View view){
-        Intent intent= new Intent(this,ExerciseInput.class);
+        Intent intent= new Intent(this, ExerciseInput.class);
         Bundle bundle=new Bundle();
 
         if(view.getId()==R.id.createExercise){ //Sends -1 as index if being called from create

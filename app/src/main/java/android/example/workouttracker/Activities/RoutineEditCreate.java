@@ -1,9 +1,12 @@
-package android.example.workouttracker;
+package android.example.workouttracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.example.workouttracker.Objects.Day;
+import android.example.workouttracker.Objects.Routine;
+import android.example.workouttracker.R;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static android.example.workouttracker.Storage.addDay;
-import static android.example.workouttracker.Storage.addRoutine;
-import static android.example.workouttracker.Storage.deleteRoutine;
 import static android.example.workouttracker.Storage.main;
 import static android.example.workouttracker.Storage.testMain;
 import static android.example.workouttracker.Storage.updateDay;
-import static android.example.workouttracker.Storage.updateRoutine;
 
 public class RoutineEditCreate extends AppCompatActivity {
     Routine newRoutine=new Routine("defaultRoutineName"); //Routine being created/edited
@@ -147,7 +147,7 @@ public class RoutineEditCreate extends AppCompatActivity {
     }
 
     public void createDay(View view){
-        Intent intent= new Intent(this,DayEditCreate.class);
+        Intent intent= new Intent(this, DayEditCreate.class);
 
         Bundle bundle=new Bundle();
         bundle.putInt("routineIndex",index);

@@ -1,8 +1,10 @@
-package android.example.workouttracker;
+package android.example.workouttracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.example.workouttracker.Objects.Routine;
+import android.example.workouttracker.R;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +56,7 @@ public class SelectEdit extends AppCompatActivity {
     }
 
     public void createRoutine(View view){
-        Intent intent= new Intent(this,RoutineEditCreate.class);
+        Intent intent= new Intent(this, RoutineEditCreate.class);
 
         Bundle bundle=new Bundle();
 

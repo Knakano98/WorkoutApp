@@ -1,9 +1,12 @@
-package android.example.workouttracker;
+package android.example.workouttracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.example.workouttracker.Objects.Day;
+import android.example.workouttracker.Objects.Exercise;
+import android.example.workouttracker.R;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
