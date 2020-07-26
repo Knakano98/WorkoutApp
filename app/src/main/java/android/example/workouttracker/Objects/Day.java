@@ -1,4 +1,4 @@
-package android.example.workouttracker;
+package android.example.workouttracker.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;

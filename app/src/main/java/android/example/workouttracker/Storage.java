@@ -1,5 +1,8 @@
 package android.example.workouttracker;
 
+import android.example.workouttracker.Objects.Day;
+import android.example.workouttracker.Objects.Exercise;
+import android.example.workouttracker.Objects.Routine;
 import android.util.Log;
 
 import java.util.ArrayList;

@@ -3,6 +3,7 @@ package android.example.workouttracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.example.workouttracker.Activities.SelectEdit;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Log.v("debug","EXECUTE");
     }
     public void selectEdit(View view){
-        Intent intent=new Intent(this,SelectEdit.class);
+        Intent intent=new Intent(this, SelectEdit.class);
         startActivity(intent);
         Log.v("debug","SlEDIT");
     }
