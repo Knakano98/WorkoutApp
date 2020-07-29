@@ -3,7 +3,8 @@ package android.example.workouttracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.example.workouttracker.Activities.SelectEdit;
+import android.example.workouttracker.ExecuteActivities.Execute;
+import android.example.workouttracker.InputActivities.SelectEdit;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     //Functions for button on main activity
     public void execute(View view){
         //Open new activity here
-        Intent intent=new Intent(this,Execute.class);
+        Intent intent=new Intent(this, Execute.class);
         startActivity(intent);
         Log.v("debug","EXECUTE");
     }

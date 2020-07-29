@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Exercise implements Parcelable {
-    private String name;
+    private String exerciseName;
     private int reps;
     private int weight;
     private int sets;
@@ -12,7 +12,7 @@ public class Exercise implements Parcelable {
     //All these have to be accessible/editable outside so all need getters/setters
 
     public Exercise(String name,int reps, int weight, int sets, int restTime){ //Constructor
-        this.name=name;
+        this.exerciseName=name;
         this.reps=reps;
         this.weight=weight;
         this.sets=sets;
@@ -21,7 +21,7 @@ public class Exercise implements Parcelable {
 
     //getters
     public String getName(){
-        return name;
+        return exerciseName;
     }
     public int getReps(){
         return reps;
@@ -36,7 +36,7 @@ public class Exercise implements Parcelable {
 
     //setters
     public void setName(String name){
-        this.name=name;
+        this.exerciseName=name;
     }
     public void setReps(int reps){
         this.reps=reps;
@@ -50,7 +50,7 @@ public class Exercise implements Parcelable {
     public void setRestTime(int restTime){this.restTime=restTime;}
 
     protected Exercise(Parcel in) {
-        name = in.readString();
+        exerciseName = in.readString();
         reps = in.readInt();
         weight = in.readInt();
         sets = in.readInt();
@@ -64,7 +64,7 @@ public class Exercise implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(exerciseName);
         dest.writeInt(reps);
         dest.writeInt(weight);
         dest.writeInt(sets);

@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ExerciseInput"></activity>
-        <activity android:name=".Activities.DayEditCreate" />
-        <activity android:name=".Activities.RoutineEditCreate" />
+        <activity android:name=".ExecuteActivities.ExecuteRoutine"></activity>
+        <activity android:name=".InputActivities.ExerciseInput" />
+        <activity android:name=".InputActivities.DayEditCreate" />
+        <activity android:name=".InputActivities.RoutineEditCreate" />
         <activity android:name=".History" />
         <activity android:name=".Stats" />
-        <activity android:name=".Activities.SelectEdit" />
-        <activity android:name=".Execute" />
+        <activity android:name=".InputActivities.SelectEdit" />
+        <activity android:name=".ExecuteActivities.Execute" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

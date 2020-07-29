@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExecuteActivities.Execute">
+    tools:context=".ExecuteActivities.ExecuteRoutine">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,29 +15,17 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/routineScrollView">
+            android:id="@+id/dayScrollView">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:id="@+id/routineContainer">
-
-
-
-
+                android:id="@+id/dayContainer">
 
             </LinearLayout>
         </ScrollView>
 
-
-
-
-
-
-
-
-
-
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

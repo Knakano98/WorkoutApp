@@ -7,21 +7,21 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class Day implements Parcelable {
-    private String name;
+    private String dayName;
     private ArrayList<Exercise> day;
     //Needs get, add, remove at index,set
 
     public Day(String name){
         this.day=new ArrayList<Exercise>();
-        this.name=name;
+        this.dayName=name;
     }
 
     public String getName(){
-        return name;
+        return dayName;
     }
 
     public void setName(String name){
-        this.name=name;
+        this.dayName=name;
     }
 
     public int daySize(){
@@ -58,7 +58,7 @@ public class Day implements Parcelable {
 
     //Parsable stuff
     protected Day(Parcel in) {
-        name = in.readString();
+        dayName = in.readString();
         if (in.readByte() == 0x01) {
             day = new ArrayList<Exercise>();
             in.readList(day, Exercise.class.getClassLoader());
@@ -74,7 +74,7 @@ public class Day implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(dayName);
         if (day == null) {
             dest.writeByte((byte) (0x00));
         } else {

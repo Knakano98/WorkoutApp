@@ -7,16 +7,16 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class Routine implements Parcelable{
-    private String name;
+    private String routineName;
     private ArrayList<Day> routine;
 
     public Routine(String name){
-        this.name=name;
+        this.routineName=name;
         this.routine=new ArrayList<Day>();
     }
 
     public void setName(String name){
-        this.name=name;
+        this.routineName=name;
     }
 
     public int routineSize(){
@@ -24,7 +24,7 @@ public class Routine implements Parcelable{
     }
 
     public String getName(){
-        return name;
+        return routineName;
     }
 
     public Day getAtIndex(int index){
@@ -52,7 +52,7 @@ public class Routine implements Parcelable{
 
     //Parcelable Implementation
     protected Routine(Parcel in) {
-        name = in.readString();
+        routineName = in.readString();
         if (in.readByte() == 0x01) {
             routine = new ArrayList<Day>();
             in.readList(routine, Day.class.getClassLoader());
@@ -68,7 +68,7 @@ public class Routine implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(routineName);
         if (routine == null) {
             dest.writeByte((byte) (0x00));
         } else {
