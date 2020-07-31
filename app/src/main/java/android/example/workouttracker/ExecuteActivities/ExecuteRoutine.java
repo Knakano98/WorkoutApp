@@ -2,6 +2,7 @@ package android.example.workouttracker.ExecuteActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.example.workouttracker.InputActivities.RoutineEditCreate;
 import android.example.workouttracker.Objects.Day;
 import android.example.workouttracker.Objects.Routine;
@@ -18,6 +19,8 @@ import static android.example.workouttracker.Storage.main;
 
 public class ExecuteRoutine extends AppCompatActivity {
 
+    Routine routine=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,7 @@ public class ExecuteRoutine extends AppCompatActivity {
         this.setTitle("Executing: RoutineName");
         setContentView(R.layout.activity_execute_routine);
 
-        Routine routine=getIntent().getParcelableExtra("routine");
+        routine=getIntent().getParcelableExtra("routine");
 
         containerLinLayout=findViewById(R.id.dayContainer);
 
@@ -34,6 +37,8 @@ public class ExecuteRoutine extends AppCompatActivity {
         createListView(routine);
     }
 
+
+    int dayIndex=-420;
     private LinearLayout containerLinLayout;
     public void createListView(Routine routine){
         containerLinLayout.removeAllViews();
@@ -54,7 +59,8 @@ public class ExecuteRoutine extends AppCompatActivity {
 
             executeDay.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    //Open exercise list activity TODO 
+                    dayIndex = ((ViewGroup) dynamicLinLayout.getParent()).indexOfChild(dynamicLinLayout);
+                    startDayExecuteActivity();
                 }
             });
 
@@ -62,6 +68,23 @@ public class ExecuteRoutine extends AppCompatActivity {
             containerLinLayout.addView(dynamicLinLayout); //Add newly generated day to container linear layout
         }
     }
+
+    private void startDayExecuteActivity(){
+        Intent intent= new Intent(this, ExecuteDay.class);
+
+
+
+        Day executedDay=routine.getAtIndex(dayIndex);
+
+        intent.putExtra("day",executedDay);
+
+
+        int ROUTINE_EXECUTE=1;
+
+        //Should this be startActivityForResult?
+        startActivityForResult(intent,ROUTINE_EXECUTE); //Start routine input activity
+    }
+
 
 
 
