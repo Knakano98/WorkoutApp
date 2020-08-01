@@ -20,16 +20,20 @@ import static android.example.workouttracker.Storage.main;
 public class ExecuteRoutine extends AppCompatActivity {
 
     Routine routine=null;
+    String routineName="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.setTitle("Executing: RoutineName");
+
         setContentView(R.layout.activity_execute_routine);
 
         routine=getIntent().getParcelableExtra("routine");
+        routineName=routine.getName();
 
+
+        this.setTitle("Executing: " + routineName);
         containerLinLayout=findViewById(R.id.dayContainer);
 
         routine.logRoutine();
@@ -75,6 +79,7 @@ public class ExecuteRoutine extends AppCompatActivity {
 
 
         Day executedDay=routine.getAtIndex(dayIndex);
+        intent.putExtra("routineName",routineName);
 
         intent.putExtra("day",executedDay);
 
