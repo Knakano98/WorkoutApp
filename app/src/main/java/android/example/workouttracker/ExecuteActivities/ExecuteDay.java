@@ -24,7 +24,7 @@ public class ExecuteDay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_execute_day);
 
-
+        //Create Stat object here for day
 
         day=getIntent().getParcelableExtra("day");
         routineName=getIntent().getStringExtra("routineName");

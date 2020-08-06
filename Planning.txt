@@ -19,9 +19,48 @@ Todo:
 EXECUTE PLANNING: 
 -Opening execute shows list of days from routine selected
 -Clicking day shows list of exercises
--Clicking routine opens Input to enter weight/rep of exercise
+-Clicking excersie opens Input to enter weight/rep of exercise
 -Finish saves info (Need to create class to store "stats") for that set
 -Timer starts for rest time 
+
+
+Stats: 
+Each day has seperate stat object 
+	-Need to store
+		-Day being executed 
+			-Day Stat object 
+		-Stats for each set of exercise (weight, reps) and need to associate it with the set 
+			-Set Object 
+				-Reps 
+				-Weight 
+				-Set ID (Maybe not needed, store sets in array and use index as set ID?)
+		-For each exercise, we would want info on that exercise from the same rountine, but maybe from different day.  
+			-Within each exercise, we would need set info. Array list of sets probably fine tbh 
+			-exerciseStat Object 
+				-Arraylist of Sets 
+				-Date 
+				-Name 
+	-Main Use cases
+		-Accessing stats on an exercise only basis (Doing exercise and seeing previous reps/weights)
+			-Store exerciseStat in arraylist, with first one being the latest. Scope is within routine 
+			-RoutineStat
+				->ExerciseStatArrayList containing exerciseStat, with 0 being latest 
+					-exerciseStat contains ArrayList of sets, date and name of exercise 
+				->ExerciseStatArrayList2 etc....
+		-Accessing stats on entire previous workout basis (view as entire day)
+			-DayStat
+				-> exerciseStat of that day 
+		
+		
+-Saving Info 
+	-No change actually occurs to routine in execute
+	-Saving info= Creating new stat objects and adding them to routine's history
+	-Don't link stat objects to routine objects, theyre just read only. 
+	
+				
+Stat objects organized so that 
+
+
 
 
 
