@@ -8,7 +8,7 @@ public class DayStat {
 
     private String date;
     private String name;
-    private ArrayList<ExerciseStat> exerciseStatArrayList;
+    private ArrayList<ExerciseStat> exerciseStatArrayList=new ArrayList<>();
 
     public void setDate(String date){
         this.date=date;

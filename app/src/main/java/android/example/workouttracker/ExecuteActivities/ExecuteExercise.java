@@ -2,6 +2,8 @@ package android.example.workouttracker.ExecuteActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.example.workouttracker.Objects.Exercise;
 import android.example.workouttracker.R;
 import android.example.workouttracker.StatStorage.ExerciseStat;
@@ -40,6 +42,9 @@ public class ExecuteExercise extends AppCompatActivity {
         //On create, need to check if exerciseStat has been created for this session
         //If so, load numbers from there to editTexts and if finish is pressed, edit the exercistStat
         //Else, create new
+        //Need to find someway to "link" exerciseStat and exercise
+
+
 
 
 
@@ -50,6 +55,7 @@ public class ExecuteExercise extends AppCompatActivity {
         finishExercise.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Create exerciseStat object
+
                 ExerciseStat newExerciseStat=new ExerciseStat();
 
                 for(int i=0;i<exercise.getSets();i++){
@@ -68,9 +74,16 @@ public class ExecuteExercise extends AppCompatActivity {
                 }
 
 
+                newExerciseStat.setName(exercise.getName());
+                newExerciseStat.setDate(java.time.LocalDate.now().toString());
+
                 //newExerciseStat.logExerciseStat();
 
+                Intent returnIntent=new Intent();
+                returnIntent.putExtra("exerciseStat",newExerciseStat);
 
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
                 //return exercisestat object
 
             }
@@ -78,6 +91,24 @@ public class ExecuteExercise extends AppCompatActivity {
 
 
         generateSets();
+
+        if(getIntent().hasExtra("existingExerciseStat")){
+            Log.v("debug","EXISTING");
+            ExerciseStat existingExerciseStat=getIntent().getParcelableExtra("existingExerciseStat");
+
+
+
+            for(int i=0;i<repInputList.size();i++){
+                EditText reps=(EditText) findViewById(repInputList.get(i));
+                reps.setText(existingExerciseStat.getSets().get(i).getReps()+"");
+
+                EditText weight=(EditText) findViewById(weightInputList.get(i));
+                weight.setText(existingExerciseStat.getSets().get(i).getWeight()+"");
+            }
+
+
+        }
+
     }
 
 
