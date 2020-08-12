@@ -51,6 +51,8 @@ public class ExecuteExercise extends AppCompatActivity {
         TextView exerciseName=(TextView) findViewById(R.id.exerciseName);
         exerciseName.append(exercise.getName());
 
+
+        //Why did i do this? Chang to function+ listner in xml
         final Button finishExercise=(Button) findViewById(R.id.finishExercise);
         finishExercise.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

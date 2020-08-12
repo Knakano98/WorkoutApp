@@ -7,6 +7,8 @@ import android.example.workouttracker.InputActivities.RoutineEditCreate;
 import android.example.workouttracker.Objects.Day;
 import android.example.workouttracker.Objects.Routine;
 import android.example.workouttracker.R;
+import android.example.workouttracker.StatStorage.DayStat;
+import android.example.workouttracker.StatStorage.ExerciseStat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,10 +17,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import static android.example.workouttracker.Storage.main;
 
 public class ExecuteRoutine extends AppCompatActivity {
-
+    ArrayList<DayStat> dayHistoryList= new ArrayList<>();
     Routine routine=null;
     String routineName="";
 
@@ -90,7 +94,21 @@ public class ExecuteRoutine extends AppCompatActivity {
         startActivityForResult(intent,ROUTINE_EXECUTE); //Start routine input activity
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if (resultCode == RESULT_OK) {
 
+            DayStat dayStat=data.getParcelableExtra("DayStat");
+            Log.v("debug", dayStat.getExerciseStatArrayList().get(0).getName());
+
+            //Add daystat to arraylist
+            dayHistoryList.add(dayStat);
+            //Save dayHistoryList here (sqllite)
+
+
+        }
+    }
 
 
 }

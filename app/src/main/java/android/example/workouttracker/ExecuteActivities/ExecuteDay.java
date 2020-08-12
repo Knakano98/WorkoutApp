@@ -3,6 +3,7 @@ package android.example.workouttracker.ExecuteActivities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.example.workouttracker.InputActivities.DayEditCreate;
@@ -21,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static android.example.workouttracker.Storage.addExercise;
 import static android.example.workouttracker.Storage.updateExercise;
@@ -38,15 +40,9 @@ public class ExecuteDay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_execute_day);
 
-
-
-
-
-        //Create Stat object here for day
-
-        //Maybe use hashmap to map exercise to exercisestat
-        //initially have exercisestat all be null, then fill in as it goes
-        //if not null and being opened, then can edit that one
+        //TODO
+        //Add finish button for day
+        //Send DayStat info to storage after exiting this activity
 
 
         newDayStat= new DayStat();
@@ -69,6 +65,9 @@ public class ExecuteDay extends AppCompatActivity {
         day.logDay();
 
         createListView();
+
+
+
     }
 
     private LinearLayout containerLinLayout;
@@ -133,18 +132,46 @@ public class ExecuteDay extends AppCompatActivity {
         startActivityForResult(intent,ROUTINE_EXECUTE); //Start routine input activity
     }
 
+    public void finish(View view){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Exit Warning");
+        builder.setMessage("Are you sure you're finished?");
+
+        // add a button
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                for(Map.Entry<String, ExerciseStat> entry : exerciseStatHashMap.entrySet()) {
+                    newDayStat.addExerciseStat(entry.getValue());
+                }
+                //create return intent and pass newDayStat back to previous activity
+                Intent returnIntent=new Intent();
+                returnIntent.putExtra("DayStat",newDayStat);
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+
+            }
+        });
+        builder.setNegativeButton("no",null);
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+
+    }
+
+
     //On activity result not triggering from executeEXercise?
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-
-
-
         if (resultCode == RESULT_OK) {
 
             ExerciseStat exerciseStat=data.getParcelableExtra("exerciseStat");
             //Log.v("debug",exerciseStat.getName());
-            newDayStat.addExerciseStat(exerciseStat);
             exerciseStatHashMap.replace(exerciseStat.getName(),exerciseStat);
             exerciseStat.logExerciseStat();
 
@@ -160,7 +187,7 @@ public class ExecuteDay extends AppCompatActivity {
         builder.setMessage("Warning: Exercise info input will not be saved without finishing, are you sure?");
 
         // add a button
-        builder.setPositiveButton("Exit", new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                finish();
